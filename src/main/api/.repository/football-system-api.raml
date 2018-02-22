@@ -3,7 +3,6 @@ title: football-system-api
 
 types:
   fixture: !include fixture-schema.json
-  team: !include team-schema.json
 
 /football:
   /fixture:
@@ -39,18 +38,6 @@ types:
   /tournament:
     /{tournamentId}:
   /team:
-    post:
-      body: 
-        application/json:
-          schema: team
-      responses: 
-        201:
-          body: 
-            application/json:
-              example: {"message":"Success"}
-        500:
-          body:
-            application/json:
-              example: {"message":"Failure"}
     /{teamId}:
     /manager:
+
