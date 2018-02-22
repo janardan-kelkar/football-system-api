@@ -1,0 +1,12 @@
+{
+	"_id":"string",
+	"name":"string",
+	"country":"string",
+	"manager":"string",
+	"players":[
+				{"name":"string","kitNumber":12,"country":"string","position":"string"}
+			  ],
+	"stadium":"string",
+	"established":1892,
+	"leaguePosition":1
+}

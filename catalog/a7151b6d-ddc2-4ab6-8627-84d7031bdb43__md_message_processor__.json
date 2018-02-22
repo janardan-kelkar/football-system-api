@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "mongo-fixture-example"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "api-fixture-schema"
+        }
+    },
+    "id": "a7151b6d-ddc2-4ab6-8627-84d7031bdb43",
+    "version": "5.2.0.0"
+}
