@@ -1,0 +1,56 @@
+#%RAML 1.0
+title: football-system-api
+
+types:
+  fixture: !include fixture-schema.json
+  team: !include team-schema.json
+
+/football:
+  /fixture:
+    post:
+      body: 
+        application/json:
+          schema: fixture
+      responses: 
+        201:
+          body: 
+            application/json:
+              example: {"message":"Success"}
+        500:
+          body:
+            application/json:
+              example: {"message":"Failure"}
+    /{fixtureId}:
+      get:
+        queryParameters: 
+          fixtureId:
+            type: string
+            description: The match id of the fixture being retrieved.
+        responses: 
+          200:
+            body:
+              application/json:
+                schema: fixture
+          404:
+            body:
+              application/json:
+                example: {"message" : "Invalid match id"}
+            
+  /tournament:
+    /{tournamentId}:
+  /team:
+    post:
+      body: 
+        application/json:
+          schema: team
+      responses: 
+        201:
+          body: 
+            application/json:
+              example: {"message":"Success"}
+        500:
+          body:
+            application/json:
+              example: {"message":"Failure"}
+    /{teamId}:
+    /manager:
