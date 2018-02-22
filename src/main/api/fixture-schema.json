@@ -1,0 +1,87 @@
+{
+  "$id": "",
+  "type": "object",
+  "properties": {
+    "date": {
+      "$id": "/properties/date",
+      "type": "string",
+      "title": "The Date Schema",
+      "default": "",
+      "examples": [
+        "2017-01-01"
+      ]
+    },
+    "homeTeam": {
+      "$id": "/properties/homeTeam",
+      "type": "string",
+      "title": "The Hometeam Schema",
+      "default": "",
+      "examples": [
+        "string"
+      ]
+    },
+    "awayTeam": {
+      "$id": "/properties/awayTeam",
+      "type": "string",
+      "title": "The Awayteam Schema",
+      "default": "",
+      "examples": [
+        "string"
+      ]
+    },
+    "homeScore": {
+      "$id": "/properties/homeScore",
+      "type": "integer",
+      "title": "The Homescore Schema",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "awayScore": {
+      "$id": "/properties/awayScore",
+      "type": "integer",
+      "title": "The Awayscore Schema",
+      "default": 0,
+      "examples": [
+        0
+      ]
+    },
+    "venue": {
+      "$id": "/properties/venue",
+      "type": "string",
+      "title": "The Venue Schema",
+      "default": "",
+      "examples": [
+        "string"
+      ]
+    },
+    "status": {
+      "$id": "/properties/status",
+      "type": "string",
+      "title": "The Status Schema",
+      "default": "",
+      "examples": [
+        "string"
+      ]
+    },
+    "tournament": {
+      "$id": "/properties/tournament",
+      "type": "string",
+      "title": "The Tournament Schema",
+      "default": "",
+      "examples": [
+        "string"
+      ]
+    },
+    "attendance": {
+      "$id": "/properties/attendance",
+      "type": "integer",
+      "title": "The Attendance Schema",
+      "default": 0,
+      "examples": [
+        99000
+      ]
+    }
+  }
+}
