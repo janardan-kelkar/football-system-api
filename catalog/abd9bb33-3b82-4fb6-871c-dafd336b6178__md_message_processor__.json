@@ -1,0 +1,24 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "api-fixture-schema"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {},
+        "flowVariables": {
+            "fixtureQueryDoc": {},
+            "awayTeam": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "bson"
+            },
+            "homeTeam": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "bson"
+            }
+        }
+    },
+    "id": "abd9bb33-3b82-4fb6-871c-dafd336b6178",
+    "version": "5.2.0.0"
+}

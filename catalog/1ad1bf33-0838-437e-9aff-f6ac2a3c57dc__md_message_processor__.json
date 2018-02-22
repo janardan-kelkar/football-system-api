@@ -1,0 +1,22 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "api-team-schema"
+        },
+        "flowVariables": {
+            "existingTeam": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "mongo-team-example"
+            }
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "mongo-team-example"
+        }
+    },
+    "id": "1ad1bf33-0838-437e-9aff-f6ac2a3c57dc",
+    "version": "5.2.0.0"
+}
