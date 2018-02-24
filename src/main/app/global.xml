@@ -7,7 +7,7 @@
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-<mongo:config name="Blacksky" username="muleUser" password="mulePwd" database="muleDB" host="tux2586.myddns.me:27017" authenticationDatabase="admin" doc:name="Mongo DB: Configuration">
+<mongo:config name="Blacksky" username="muleUser" password="mulePwd" database="muleDB" host="tux2586.myddns.me:5001" authenticationDatabase="admin" doc:name="Mongo DB: Configuration">
         <reconnect frequency="10000"/>
     </mongo:config>
 
