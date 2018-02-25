@@ -44,6 +44,7 @@ payload]]></dw:set-payload>
 	leaguePosition: payload.leaguePosition default null
 }]]></dw:set-payload>
                 </dw:transform-message>
+                <set-property propertyName="http.status" value="201" doc:name="Property"/>
             </when>
             <otherwise>
                 <dw:transform-message doc:name="Map supplied payload fields." metadata:id="1ad1bf33-0838-437e-9aff-f6ac2a3c57dc">
@@ -74,6 +75,7 @@ payload]]></dw:set-payload>
 				otherwise (flowVars.existingTeam.leaguePosition))
 }]]></dw:set-payload>
                 </dw:transform-message>
+                <set-property propertyName="http.status" value="207" doc:name="Property"/>
             </otherwise>
         </choice>
         <mongo:save-document config-ref="Blacksky" collection="TEAMS" doc:name="Save/Upsert Team"/>
