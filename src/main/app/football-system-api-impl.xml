@@ -23,6 +23,10 @@ payload]]></dw:set-payload>
 {
 	"_id":lower payload.name
 }]]></dw:set-variable>
+            <dw:set-variable variableName="teamName"><![CDATA[%dw 1.0
+%output application/java
+---
+payload.name]]></dw:set-variable>
         </dw:transform-message>
         <enricher target="#[flowVars.existingTeam]" doc:name="Message Enricher">
             <mongo:find-one-document config-ref="Blacksky" collection="TEAMS" query-ref="#[flowVars.teamQueryDoc]" failOnNotFound="false" doc:name="Check if team exists"/>
@@ -45,6 +49,7 @@ payload]]></dw:set-payload>
 }]]></dw:set-payload>
                 </dw:transform-message>
                 <set-property propertyName="http.status" value="201" doc:name="Property"/>
+                <set-variable variableName="responseBody" value="#['{&quot;message&quot;:&quot;Team ' + flowVars.teamName + ' added successfully.&quot;}']" doc:name="Variable"/>
             </when>
             <otherwise>
                 <dw:transform-message doc:name="Map supplied payload fields." metadata:id="1ad1bf33-0838-437e-9aff-f6ac2a3c57dc">
@@ -76,9 +81,11 @@ payload]]></dw:set-payload>
 }]]></dw:set-payload>
                 </dw:transform-message>
                 <set-property propertyName="http.status" value="207" doc:name="Property"/>
+                <set-variable variableName="responseBody" value="#['{&quot;message&quot;:&quot;Team ' + flowVars.teamName + ' updated successfully.&quot;}']" doc:name="Variable"/>
             </otherwise>
         </choice>
         <mongo:save-document config-ref="Blacksky" collection="TEAMS" doc:name="Save/Upsert Team"/>
+        <set-payload value="#[flowVars.responseBody]" mimeType="application/json" doc:name="Set Payload"/>
     </flow>
     
 </mule>

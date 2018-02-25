@@ -9,6 +9,12 @@
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",
             "typeId": "api-team-schema"
+        },
+        "flowVariables": {
+            "teamName": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "teamName"
+            }
         }
     },
     "id": "17cb8660-d877-43bd-83ea-80ad12d95bbc",
