@@ -15,10 +15,37 @@
 
 		<mule.version>3.9.0</mule.version>
     	<mule.tools.version>1.2</mule.tools.version>
+    	
+    	<cloudhub.username>jkelkar</cloudhub.username>
+    	<cloudhub.pwd>{6He8eEAFz5oHhn1iso3kCSLgBPLZmfP0jBVPNU8hWeg=}</cloudhub.pwd>
 	</properties>
 
 	<build>
 		<plugins>
+		<!-- FOR CLOUDHUB DEPLOYMENT -->
+		<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>2.2.1</version>
+				<configuration>
+					<deploymentType>cloudhub</deploymentType>
+					<muleVersion>${mule.version}</muleVersion>
+					<username>${cloudhub.username}</username>
+					<password>${cloudhub.pwd}</password>
+					<workerType>Micro</workerType>
+					<redeploy>true</redeploy>
+					<environment>Sandbox</environment>
+				</configuration>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
