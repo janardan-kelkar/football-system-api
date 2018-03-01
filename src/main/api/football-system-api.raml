@@ -52,5 +52,15 @@ types:
           body:
             application/json:
               example: {"message":"Failure"}
-    /{teamId}:
+    /{teamName}:
+      get:
+        responses:
+          200:
+            body:
+              application/json:
+                schema: team
+          404:
+            body:
+              application/json:
+                example: {"message": "Failure"}
     /manager:

@@ -20,7 +20,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <set-payload value="{&#xA;&quot;message&quot; : &quot;Success&quot;&#xA;}" doc:name="Set Payload" />
     </flow>
     <flow name="post:/football/team:application/json:football-system-api-config">
-        <flow-ref name="post-team-flow" doc:name="Flow Reference"/>
+        <flow-ref name="post-team-flow" doc:name="Flow Reference" />
+    </flow>
+    <flow name="get:/football/team/{teamName}:football-system-api-config">
+        <flow-ref name="get-team-flow" doc:name="Flow Reference"/>
     </flow>
     <apikit:mapping-exception-strategy name="football-system-api-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">

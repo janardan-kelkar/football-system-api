@@ -1,0 +1,13 @@
+{
+    "inputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "flowVariables": {
+            "teamQueryDoc": {
+                "connectorName": "#_custom_mule_metadata_type_#",
+                "typeId": "bson"
+            }
+        }
+    },
+    "id": "af9e54f2-8799-4a1f-9c86-04d4f45d9816",
+    "version": "5.2.0.0"
+}

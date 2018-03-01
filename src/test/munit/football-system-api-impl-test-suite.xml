@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:football-system-api-impl.xml"/>
+        <spring:import resource="classpath:global.xml"/>
+    </spring:beans>
+    <munit:test name="get-team-flow-testResponseIsOfTypeApplicationJSONFor200" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Get team']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#['{&quot;name&quot;:&quot;Dummyname&quot;,&quot;stadium&quot;:&quot;Dummystadium&quot;,&quot;manager&quot;:&quot;Dummymanager&quot;,&quot;established&quot;:1901,&quot;leaguePosition&quot;:1,&quot;_id&quot;:&quot;Dummyname&quot;}']" mimeType="application/json"/>
+        </mock:when>
+        <munit:set payload="#[]" doc:name="Set Message">
+            <munit:inbound-properties>
+                <munit:inbound-property key="http.uri.params" value="#[{'teamName':'AnyStringWillDo'}]" mimeType="application/java"/>
+            </munit:inbound-properties>
+        </munit:set>
+        <flow-ref name="get-team-flow" doc:name="Flow-ref to get-team-flow"/>
+        <munit:assert-on-equals message="FAILED!! Content type expected to be application/json but was #[message.dataType.mimeType]" expectedValue="#['application/json']" actualValue="#[message.dataType.mimeType]" doc:name="Assert Equals"/>
+    </munit:test>
+    
+    <munit:test name="get-team-flow-testResponseIsOfTypeApplicationJSONFor404" description="Test">
+        <mock:when messageProcessor=".*:.*" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Get team']"/>
+            </mock:with-attributes>
+            <mock:then-return mimeType="application/json"/>
+        </mock:when>
+        <munit:set payload="#[]" doc:name="Set Message">
+            <munit:inbound-properties>
+                <munit:inbound-property key="http.uri.params" value="#[{'teamName':'AnyStringWillDo'}]" mimeType="application/java"/>
+            </munit:inbound-properties>
+        </munit:set>
+        <flow-ref name="get-team-flow" doc:name="Flow-ref to get-team-flow"/>
+        <munit:assert-on-equals message="FAILED!! Content type expected to be application/json but was #[message.dataType.mimeType]" expectedValue="#['application/json']" actualValue="#[message.dataType.mimeType]" doc:name="Assert Equals"/>
+    </munit:test>
+</mule>
