@@ -35,7 +35,7 @@
 					<password>${cloudhub.pwd}</password>
 					<workerType>Micro</workerType>
 					<redeploy>true</redeploy>
-					<environment>Sandbox</environment>
+					<environment>Development</environment>
 				</configuration>
 				<executions>
 					<execution>
