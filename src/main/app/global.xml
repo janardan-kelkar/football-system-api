@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+<mule xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
 	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
@@ -13,7 +13,8 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd">
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd">
 <mongo:config name="Blacksky" username="${mongo.user}" password="${mongo.pwd}" database="${mongo.db}" host="${mongo.host}:${mongo.port}" authenticationDatabase="${mongo.authdb}" doc:name="Mongo DB: Configuration">
         <reconnect frequency="10000"/>
     </mongo:config>
@@ -21,7 +22,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
        <http:listener-config name="football-system-api-httpListenerConfig" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
     <apikit:config name="football-system-api-config" raml="football-system-api.raml" consoleEnabled="false" doc:name="Router" />
  	<ee:object-store-caching-strategy name="Football-team-caching-strategy" keyGenerationExpression="#[message.inboundProperties.'http.uri.params'.teamName]" doc:name="Caching Strategy">
-        <in-memory-store name="football-teams" maxEntries="100" entryTTL="300000" expirationInterval="10000"/>
+        <in-memory-store name="_defaultUserObjectStore" maxEntries="100" entryTTL="300000" expirationInterval="10000"/>
     </ee:object-store-caching-strategy>
 
 </mule>
