@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -18,6 +20,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <context:property-placeholder location="${env}.properties"/>
        <http:listener-config name="football-system-api-httpListenerConfig" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
     <apikit:config name="football-system-api-config" raml="football-system-api.raml" consoleEnabled="false" doc:name="Router" />
- 
+ 	<ee:object-store-caching-strategy name="Football-team-caching-strategy" keyGenerationExpression="#[message.inboundProperties.'http.uri.params'.teamName]" doc:name="Caching Strategy">
+        <in-memory-store name="football-teams" maxEntries="100" entryTTL="300000" expirationInterval="10000"/>
+    </ee:object-store-caching-strategy>
 
 </mule>

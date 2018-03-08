@@ -30,7 +30,7 @@ http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/moc
             <mock:with-attributes>
                 <mock:with-attribute name="doc:name" whereValue="#['Get team']"/>
             </mock:with-attributes>
-            <mock:then-return mimeType="application/json"/>
+            <mock:then-return payload="#[]" mimeType="application/json"/>
         </mock:when>
         <munit:set payload="#[]" doc:name="Set Message">
             <munit:inbound-properties>
