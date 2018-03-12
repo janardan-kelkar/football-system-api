@@ -21,7 +21,7 @@ http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/moc
                 <munit:inbound-property key="http.uri.params" value="#[{'teamName':'AnyStringWillDo'}]" mimeType="application/java"/>
             </munit:inbound-properties>
         </munit:set>
-        <flow-ref name="get-team-flow" doc:name="Flow-ref to get-team-flow"/>
+        <flow-ref name="get-team-flow" doc:name="get-team-flow"/>
         <munit:assert-on-equals message="FAILED!! Content type expected to be application/json but was #[message.dataType.mimeType]" expectedValue="#['application/json']" actualValue="#[message.dataType.mimeType]" doc:name="Assert Equals"/>
     </munit:test>
     
@@ -34,10 +34,10 @@ http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/moc
         </mock:when>
         <munit:set payload="#[]" doc:name="Set Message">
             <munit:inbound-properties>
-                <munit:inbound-property key="http.uri.params" value="#[{'teamName':'AnyStringWillDo'}]" mimeType="application/java"/>
+                <munit:inbound-property key="http.uri.params" value="#[{'teamName':'A1nyStringWillDo'}]" mimeType="application/java"/>
             </munit:inbound-properties>
         </munit:set>
-        <flow-ref name="get-team-flow" doc:name="Flow-ref to get-team-flow"/>
+        <flow-ref name="get-team-flow" doc:name="get-team-flow"/>
         <munit:assert-on-equals message="FAILED!! Content type expected to be application/json but was #[message.dataType.mimeType]" expectedValue="#['application/json']" actualValue="#[message.dataType.mimeType]" doc:name="Assert Equals"/>
     </munit:test>
 </mule>
