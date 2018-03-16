@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder"
+	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
@@ -90,10 +92,6 @@ payload.name]]></dw:set-variable>
         </choice>
         <mongo:save-document config-ref="Blacksky" collection="TEAMS" doc:name="Save/Upsert Team"/>
         <set-payload value="#[flowVars.responseBody]" mimeType="application/json" doc:name="Set Payload"/>
-    </flow>
-    <flow name="football-system-api-implFlow">
-        <http:listener config-ref="football-system-api-httpListenerConfig" path="/test" allowedMethods="POST" doc:name="HTTP"/>
-        <mongo:insert-document config-ref="Blacksky" collection="TEAMS" doc:name="Mongo DB"/>
     </flow>
     <flow name="get-team-flow">
         <dw:transform-message doc:name="1.Prepare mongo query doc." metadata:id="af9e54f2-8799-4a1f-9c86-04d4f45d9816">
