@@ -1,23 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
-	xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo"
-	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+<mule xmlns:api-platform-gw="http://www.mulesoft.org/schema/mule/api-platform-gw" xmlns:secure-property-placeholder="http://www.mulesoft.org/schema/mule/secure-property-placeholder"
+	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd">
-<mongo:config name="Blacksky" username="muleUser" password="mulePwd" database="muleDB" host="tux2586.myddns.me:5001" authenticationDatabase="admin" doc:name="Mongo DB: Configuration">
-        <reconnect frequency="10000"/>
-    </mongo:config>
-    <context:property-placeholder location="${env}.properties"/>
-       <http:listener-config name="football-system-api-httpListenerConfig" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
-    <apikit:config name="football-system-api-config" raml="football-system-api.raml" consoleEnabled="false" doc:name="Router" />
- 
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
+http://www.mulesoft.org/schema/mule/secure-property-placeholder http://www.mulesoft.org/schema/mule/secure-property-placeholder/current/mule-secure-property-placeholder.xsd
+http://www.mulesoft.org/schema/mule/api-platform-gw http://www.mulesoft.org/schema/mule/api-platform-gw/current/mule-api-platform-gw.xsd">
+	<http:listener-config name="football-system-api-httpListenerConfig"
+		host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
+	<apikit:config name="football-system-api-config" raml="football-system-api.raml"
+		consoleEnabled="false" doc:name="Router" />
+	
+	<secure-property-placeholder:config
+		name="Secure_Property_Placeholder" key="${key}" location="${env}.properties"
+		doc:name="Secure Property Placeholder" encryptionAlgorithm="Blowfish"/>
+	<context:property-placeholder location="${env}.properties" />
+	<mongo:config name="Blacksky" username="${mongo.user}"
+		password="${mongo.pwd}" database="${mongo.db}" host="${mongo.host}:${mongo.port}"
+		authenticationDatabase="${mongo.authdb}" doc:name="Mongo DB: Configuration">
+		<reconnect frequency="10000" />
+	</mongo:config>
+	<ee:object-store-caching-strategy
+		name="Football-team-caching-strategy" keyGenerationExpression="#[message.inboundProperties.'http.uri.params'.teamName]"
+		synchronized="true" doc:name="Caching Strategy">
+		<in-memory-store name="football-teams" maxEntries="${caching.teams.max.entries}"
+			entryTTL="${caching.teams.entry.ttl}" expirationInterval="${caching.teams.expire.interval}" />
+	</ee:object-store-caching-strategy>
+    <api-platform-gw:api apiName="${api.manager.name}" version="${api.manager.version}" flowRef="football-system-api-main" create="false" apikitRef="football-system-api-config" doc:name="API Autodiscovery"/>
 
 </mule>

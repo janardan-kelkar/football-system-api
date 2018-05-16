@@ -13,6 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <apikit:console config-ref="football-system-api-config" doc:name="APIkit Console" />
     </flow>
     <flow name="get:/football/fixture/{fixtureId}:football-system-api-config">
+        <logger message="#[message.inboundProperties.'client_id']" level="INFO" doc:name="Logger"/>
         <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload" />
     </flow>
     <flow name="post:/football/fixture:application/json:football-system-api-config">
@@ -20,7 +21,10 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <set-payload value="{&#xA;&quot;message&quot; : &quot;Success&quot;&#xA;}" doc:name="Set Payload" />
     </flow>
     <flow name="post:/football/team:application/json:football-system-api-config">
-        <flow-ref name="post-team-flow" doc:name="Flow Reference"/>
+        <flow-ref name="post-team-flow" doc:name="post-team-flow" />
+    </flow>
+    <flow name="get:/football/team/{teamName}:football-system-api-config">
+        <flow-ref name="get-team-flow" doc:name="get-team-flow"/>
     </flow>
     <apikit:mapping-exception-strategy name="football-system-api-apiKitGlobalExceptionMapping">
         <apikit:mapping statusCode="404">
