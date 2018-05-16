@@ -13,6 +13,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
         <apikit:console config-ref="football-system-api-config" doc:name="APIkit Console" />
     </flow>
     <flow name="get:/football/fixture/{fixtureId}:football-system-api-config">
+        <logger message="#[message.inboundProperties.'client_id']" level="INFO" doc:name="Logger"/>
         <set-payload value="#[NullPayload.getInstance()]" doc:name="Set Payload" />
     </flow>
     <flow name="post:/football/fixture:application/json:football-system-api-config">

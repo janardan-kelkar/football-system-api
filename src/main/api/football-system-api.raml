@@ -1,5 +1,14 @@
 #%RAML 1.0
+version: v1
 title: football-system-api
+
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
 
 types:
   fixture: !include fixture-schema.json
@@ -40,6 +49,7 @@ types:
     /{tournamentId}:
   /team:
     post:
+      is:  [client-id-required]
       body: 
         application/json:
           schema: team
@@ -54,6 +64,7 @@ types:
               example: {"message":"Failure"}
     /{teamName}:
       get:
+        is:  [client-id-required]
         responses:
           200:
             body:

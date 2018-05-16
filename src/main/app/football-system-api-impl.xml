@@ -55,7 +55,6 @@ payload.name]]></dw:set-variable>
                 </dw:transform-message>
                 <set-property propertyName="http.status" value="201" doc:name="Property"/>
                 <set-variable variableName="responseBody" value="#['{&quot;message&quot;:&quot;Team ' + flowVars.teamName + ' added successfully.&quot;}']" doc:name="Variable"/>
-                <logger level="INFO" doc:name="Logger"/>
             </when>
             <otherwise>
                 <dw:transform-message doc:name="Map supplied payload fields." metadata:id="1ad1bf33-0838-437e-9aff-f6ac2a3c57dc">
@@ -135,7 +134,6 @@ payload.name]]></dw:set-variable>
                 </dw:transform-message>
             </otherwise>
         </choice>
-        <logger level="INFO" doc:name="Logger"/>
     </flow>
     
 </mule>

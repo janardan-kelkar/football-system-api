@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.tuxmac</groupId>
 	<artifactId>football-system-api</artifactId>
@@ -20,8 +19,8 @@
 		<mule.munit.support.version>3.9.1</mule.munit.support.version>
 		<mule.maven.plugin.version>2.2.1</mule.maven.plugin.version>
 
-		<cloudhub.username />
-		<cloudhub.pwd />
+		<cloudhub.username/>
+		<cloudhub.pwd/>
 
 	</properties>
 	<profiles>
@@ -78,7 +77,7 @@
 							</arguments>
 							<target>dev</target>
 							<targetType>server</targetType>
-							<environment>Development</environment>
+							<environment>${cloudhub.environment}</environment>
 						</configuration>
 						<executions>
 							<execution>
@@ -298,7 +297,13 @@
 			<artifactId>mule-module-security-property-placeholder</artifactId>
 			<version>1.7.3</version>
 		</dependency>
-	</dependencies>
+	<dependency>
+            <groupId>com.mulesoft.anypoint</groupId>
+            <artifactId>api-gateway-client</artifactId>
+            <version>3.9.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 	<repositories>
 		<repository>
