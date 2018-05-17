@@ -22,6 +22,9 @@
 		<cloudhub.username/>
 		<cloudhub.pwd/>
 		<cloudhub.environment />
+		
+		<anypoint.application.name>football-system-api</anypoint.application.name>
+		<anypoint.environment.qualifier />
 
 	</properties>
 	<profiles>
@@ -35,11 +38,12 @@
 						<version>${mule.maven.plugin.version}</version>
 						<configuration>
 							<deploymentType>cloudhub</deploymentType>
+							<applicationName>${anypoint.environment.qualifier>-${anypoint.application.name}</applicationName>
 							<muleVersion>${mule.version}</muleVersion>
 							<username>${cloudhub.username}</username>
 							<password>${cloudhub.pwd}</password>
 							<properties>
-								<key>dummy</key>
+								<key>${</key>
 								<env>dev</env>
 							</properties>
 							<workerType>Micro</workerType>
