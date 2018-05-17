@@ -38,7 +38,7 @@
 						<version>${mule.maven.plugin.version}</version>
 						<configuration>
 							<deploymentType>cloudhub</deploymentType>
-							<applicationName>${anypoint.environment.qualifier>-${anypoint.application.name}</applicationName>
+							<applicationName>${anypoint.environment.qualifier}-${anypoint.application.name}</applicationName>
 							<muleVersion>${mule.version}</muleVersion>
 							<username>${cloudhub.username}</username>
 							<password>${cloudhub.pwd}</password>
