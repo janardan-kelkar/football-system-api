@@ -21,6 +21,7 @@
 
 		<cloudhub.username/>
 		<cloudhub.pwd/>
+		<cloudhub.environment />
 
 	</properties>
 	<profiles>
@@ -42,7 +43,7 @@
 								<env>dev</env>
 							</properties>
 							<workerType>Micro</workerType>
-							 <redeploy>${cloudhub.redeploy}</redeploy>
+							 <redeploy>true</redeploy>
 							<environment>${cloudhub.environment}</environment>
 						</configuration>
 						<executions>
